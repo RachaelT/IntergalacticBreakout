@@ -1,11 +1,11 @@
-/**
- * @(#)Powerup.java
- *
- *
- * @author 
- * @version 1.00 2017/4/24
+/**This abstract class represents a powerup, and
+ * is the superclass from which all types of powerups are 
+ * created
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
-
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,8 +14,9 @@ import javax.imageio.ImageIO;;
 public abstract class Powerup {
 	
 	public static final long DURATION = 30000;
-	public static final int WIDTH = 10;
-	public static final int HEIGHT = 10;
+	public static final int WIDTH = 30;
+	public static final int HEIGHT = 30;
+	
 	
 	private boolean active;
 	

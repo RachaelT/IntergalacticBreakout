@@ -1,9 +1,9 @@
-/**
- * @(#)LevelComponent.java
- *
- *
- * @author 
- * @version 1.00 2017/5/10
+/**This is the abstract class from which all levels are
+ * subclasses and created, managing the drawing of graphics
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
 
 import java.awt.Color;
@@ -18,6 +18,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 public abstract class LevelComponent extends JComponent {
+	
+	private final int FONT_SIZE = 18;
+	private final int TEXT_HEIGHT = 570;
+	private final int TEXT_LEFT = 10;
+	private final int TEXT_RIGHT = 700;
+	private final int RANDOM_VAR = 4;
+	private final int RANDOM_MIN = 5;
 	
 	private ArrayList<Brick> bricks;
 	private ArrayList<Ball> balls;
@@ -60,7 +67,9 @@ public abstract class LevelComponent extends JComponent {
     	for(Brick b: bricks)
     	{
 			gr2.drawImage(b.getColor(), b.getBounds().x, 
-										b.getBounds().y, 50, 30, null);
+										b.getBounds().y, 
+										(int) b.getBounds().getWidth(), 
+										(int) b.getBounds().getHeight(), null);
     	}
     	
     	//Draw Paddle
@@ -72,7 +81,7 @@ public abstract class LevelComponent extends JComponent {
     	{
     		if(!b.inPlay())
     		{
-    			b.updateBounds(paddle.getBounds().x + paddle.getWidth()/2,
+    			b.updateBounds(paddle.getBounds().x + paddle.getWidth() / 2,
     						   paddle.getBounds().y);
     		}
     		else
@@ -80,24 +89,27 @@ public abstract class LevelComponent extends JComponent {
     			b.move();
     		}
     		gr2.drawImage(b.getImage(), (int)(b.getBounds().x), 
-    									(int)(b.getBounds().y), 20, 20, null);
+    									(int)(b.getBounds().y), 
+    									b.getRadius() * 2, 
+    									b.getRadius() * 2, null);
     	}
     	
     	//Draw Lives
     	g.setColor(Color.WHITE);
-    	Font myFont = new Font("SanSerif", Font.BOLD, 18);
+    	Font myFont = new Font("SanSerif", Font.BOLD, FONT_SIZE);
     	g.setFont(myFont);
-    	g.drawString("Lives: " + lives, 700, 570);
+    	g.drawString("Lives: " + lives, TEXT_RIGHT, TEXT_HEIGHT);
     	
     	g.setColor(Color.WHITE);
     	g.setFont(myFont);
-    	g.drawString("Score: " + score, 10, 570);
+    	g.drawString("Score: " + score, TEXT_LEFT, TEXT_HEIGHT);
     	
     	//Draw falling powerups
     	for(Powerup p: powerups)
     	{
     		if(!p.isActive()) gr2.drawImage(p.getImage(), p.getBounds().x, 
-    									    p.getBounds().y, 30, 30, null);
+    									    p.getBounds().y, p.WIDTH, 
+    									    p.HEIGHT, null);
     	}	
 	}
 	
@@ -154,7 +166,7 @@ public abstract class LevelComponent extends JComponent {
 	 */
 	public int getRandom()
 	{
-		return (int) (Math.random() * 4) + 5;
+		return (int) (Math.random() * RANDOM_VAR) + RANDOM_MIN;
 	}
    
 	/** Finds the ball's sprite from a filename

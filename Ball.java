@@ -1,4 +1,10 @@
-
+/**This class represents a ball in the breakout game,
+ * maintaining it's boundaries, motion, and appearance
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
+ */
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
