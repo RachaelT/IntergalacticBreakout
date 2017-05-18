@@ -12,20 +12,21 @@ public class LevelOneComponent extends LevelComponent
 {
 	
 	
-	/**
-	 * 
+	/**Initializes the game element collections
 	 */
     public LevelOneComponent() 
     {
-    	super();
+    	super("MilkyWay.jpg");
     	init();
     }
     
-    /**
+    /**Initializes the game elements
+     * and adds them to the appropriate collection
 	 * 
 	 */
     public void init()
     {
+    	
     	ArrayList<Brick> bricks = super.getBricks(); 
     	
     	//Generates Brick pattern
@@ -42,7 +43,7 @@ public class LevelOneComponent extends LevelComponent
     							 30 + (i * 30))));
     		bricks.add(new Brick(i * 50, 60 + (i * 30),
     							 i%8 + 1, 
-    							 new MultiballPowerup(i * 50+ Brick.WIDTH / 2,
+    							 new MeteorPowerup(i * 50+ Brick.WIDTH / 2,
     							 60 + (i * 30))));
     	}
     	
@@ -50,7 +51,7 @@ public class LevelOneComponent extends LevelComponent
     	{
     		bricks.add(new Brick(i * 50 + 400, 270 - (i * 30),
     						  	 i%8 + 1, 
-    						  	 new StickyBallPowerup(i * 50 + 400 + 
+    						  	 new MeteorPowerup(i * 50 + 400 + 
     						  			 			   Brick.WIDTH / 2, 
     						  			 			   270 - (i * 30))));
     		bricks.add(new Brick(i * 50 + 400, 240 - (i * 30),
@@ -64,12 +65,16 @@ public class LevelOneComponent extends LevelComponent
     									 	       Brick.WIDTH / 2,
     									 	       210 - (i * 30))));
     	}
+    	
     	ArrayList<Ball> balls = super.getBalls(); 
     	Paddle paddle = super.getPaddle();
+    	
     	//Adds a ball
     	balls.add(new Ball(paddle.getBounds().x + paddle.getWidth()/2,
     					   paddle.getBounds().y,
     					   super.getRandom(), -super.getRandom()));
+    	
+    	
     }
     
     

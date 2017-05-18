@@ -28,11 +28,10 @@ public class Brick {
 	private Powerup p;
 	private BufferedImage c;
 	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param durability
+	/** Creates a new Brick with the given parameters
+	 * @param x x coordinate of the brick
+	 * @param y y coordinate of the brick
+	 * @param durability the number of hits to destroy the brick
 	 */
 	public Brick(int x, int y, int durability) 
 	{
@@ -42,12 +41,11 @@ public class Brick {
     	c = setDurability(durability);
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param durability
-	 * @param p
+	/** Creates a new brick with a powerup inside
+	 * @param x x coordinate of the brick
+	 * @param y y coordinate of the brick
+	 * @param durability the number of hits to destroy the brick
+	 * @param p the brick's powerup
 	 */
     public Brick(int x, int y, int durability, Powerup p)
     {
@@ -57,8 +55,7 @@ public class Brick {
     	this.p = p;
     }
     
-    /**
-     * 
+    /**Decrements the durability if the brick has been hit
      */
  	public void touched()
  	{
@@ -66,18 +63,16 @@ public class Brick {
  		c = setDurability(durability);
  	}
  	
- 	/**
- 	 * 
- 	 * @return
+ 	/**Returns the number of hits the brick has left
+ 	 * @return the number of hits the brick has left
  	 */
  	public int getDurability()
  	{
  		return durability;
  	}
  	
- 	/**
- 	 * 
- 	 * @return
+ 	/**Returns the color (image) of the brick
+ 	 * @return the brick's color
  	 */
  	public BufferedImage getColor()
  	{
@@ -85,37 +80,33 @@ public class Brick {
  		return c;
  	}
  	
- 	/**
- 	 * 
- 	 * @return
+ 	/**Returns the brick's powerup
+ 	 * @return the brick's powerup
  	 */
  	public Powerup getPowerup()
  	{
  		return p;
  	}
  	
- 	/**
- 	 * 
- 	 * @return
+ 	/**Returns the brick's bounding rectangle
+ 	 * @return the brick's bounding rectangle
  	 */
  	public Rectangle getBounds()
  	{
  		return bounds;
  	}
  	
- 	/**
- 	 * 
- 	 * @return
+ 	/**Returns if the brick is destroyed
+ 	 * @return whether the brick is destroyed
  	 */
  	public boolean isDestroyed()
  	{
  		return destroyed;
  	}
  	
- 	/**
- 	 * 
- 	 * @param durability
- 	 * @return
+ 	/**Updates the brick's color based on its durability
+ 	 * @param durability the number of hits the brick has left
+ 	 * @return the brick's color (image)
  	 */
  	private BufferedImage setDurability(int durability)
  	{
@@ -169,10 +160,9 @@ public class Brick {
  	}
 	
 
-	/**
-	 * 
-	 * @param fileName
-	 * @return
+	/**Finds an image file from it's filename
+	 * @param fileName the filename of a brick sprite
+	 * @return the brick sprite
 	 */
 	private BufferedImage testImage(String fileName)
 	{

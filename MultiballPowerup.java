@@ -11,20 +11,38 @@ import java.awt.Rectangle;
 
 public class MultiballPowerup extends Powerup {
 	
-    public MultiballPowerup(int x, int y) {
+	/**Creates a new powerup
+	 * @param x x coordinate of powerup
+	 * @param y y coordinate of powerup
+	 */
+    public MultiballPowerup(int x, int y) 
+    {
     	super(x, y, "multiball.png");
     }
     
-    public String getEffect(){
+    /**Returns the effect of the powerup
+     * @return the effect of the powerup
+     */
+    public String getEffect()
+    {
     	return "Multiball";
     }
     
-    public String getEffectDescription(){
+    /**Returns a description of the powerup's effect
+     * @return a description of the powerup's effect
+     */
+    public String getEffectDescription()
+    {
     	return "A second ball is put into play";
     }
     
+    /**Returns whether the powerup is stopped. 
+     * This powerup stops as soon as it is activated
+     * @return whether the powerup is stopped
+     */
     @Override
-    public boolean stop(){
+    public boolean stop()
+    {
     	return (isActive());
     }
     

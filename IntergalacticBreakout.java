@@ -10,17 +10,20 @@
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -29,7 +32,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.awt.event.MouseAdapter;
 
 
@@ -52,34 +61,65 @@ public class IntergalacticBreakout extends MouseAdapter {
 	private JFrame frame;
 	private JPanel menu;
 	JLabel picLabel;
+	private String hs1;
+	private String hs2;
+	private String hs3;
+	private String hs4;
+	private String hs5;
+	
+	private JLabel s1;
+	private JLabel s2;
+	private JLabel s3;
+	private JLabel s4;
+	private JLabel s5;
+	
+	
+	private int h1;
+	private int h2;
+	private int h3;
+	private int h4;
+	private int h5;
+	
 	private static LevelComponent curComp;
 	private Timer timer;
 	
+	Box box;
 	//Game state flags
 	boolean stickyBall;
 	boolean meteor;
 	boolean won;
 	boolean begin;
-
+	boolean end;
+	boolean highScore;
+	boolean menuM;
+	JTextField name;
 	/**
+	 * @throws FileNotFoundException 
 	 * 
 	 * 
 	 */
-    public IntergalacticBreakout() 
+    public IntergalacticBreakout() throws FileNotFoundException 
     {
     	//Initialize flags to false
     	stickyBall = false;
     	won = false;
     	begin = false;
+    	end = false;
+    	highScore = false;
+    	menuM = true;
     	
-    	//Queues all the levels
+    	
     	levels = new ArrayList<LevelComponent>();
     	levels.add(new LevelOneComponent());
     	
-    	//Initial number of lives
-    	numLives = 5;
-    	score = 0;
-	
+    	s1 = new JLabel();
+    	s2 = new JLabel();
+    	s3 = new JLabel();
+    	s4 = new JLabel();
+    	s5 = new JLabel();
+    	
+    	
+    	
     	//Sets up frame
     	frame = new JFrame();
 		frame.setSize(800, 600);
@@ -89,29 +129,7 @@ public class IntergalacticBreakout extends MouseAdapter {
 		frame.addMouseMotionListener(this);
 		frame.addMouseListener(this);
 		frame.setResizable(false);
-		
-		
-		menu = new JPanel();
-		
-		BufferedImage background = testImage("MenuBack.png");
-		menu.setLayout(new GridBagLayout());
-		picLabel = new JLabel(new ImageIcon(background));
-		picLabel.setLayout(new GridBagLayout());
-		picLabel.setAlignmentX(Component.TOP_ALIGNMENT);
-		
-		
-		start = new JButton("Start Game");
-		start.setAlignmentX(Component.CENTER_ALIGNMENT);
-		highScores = new JButton("High Scores");
-		highScores.setAlignmentX(Component.CENTER_ALIGNMENT);
-		GridBagConstraints gbc = new GridBagConstraints();
-		Box box = Box.createVerticalBox();
-		box.add(start);
-		box.add(highScores);
-		picLabel.add(box, gbc);
-		frame.add(picLabel);
-		frame.setVisible(true);
-		
+
 		run();
 		
     }
@@ -126,13 +144,119 @@ public class IntergalacticBreakout extends MouseAdapter {
 		    @Override
 		    public void actionPerformed(ActionEvent ae) 
 		    {
-		    
+		    	
+		    	if(ae.getSource() == name){
+		    		String s = name.getText();
+		    		 String[]  j = {hs1, hs2, hs3, hs4, hs5};
+		    		 int[] h = {h1, h2, h3, h4, h5};
+		    		 try {
+						FileWriter fw = new FileWriter(new File("HighScores.txt"));
+						for(int i = 0; i < j.length; i++){
+			    			 if(score > h[i]){
+			    				 fw.write(s + "\n");
+			    				 fw.write(score + "\n");
+			    				 score = h[i];
+			    				 s = j[i];
+			    			 }
+			    			 else{
+			    				 
+			    				 fw.write(j[i] + "\n");
+			    				 fw.write(h[i] + "\n");
+			    			 }
+			    		 }
+						fw.close();
+						updateScores();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    		 menuM = true;
+		    		 begin = false;
+		    		 
+		    	}
+		    	if(ae.getSource() == highScores){
+		    		highScore = true;
+		    		
+		    	}
+		    	if(ae.getSource() == start)
+		    	{
+		    		begin = true;
+		    	}
+		    	
+		    	if(highScore){
+		    		frame.getContentPane().removeAll();
+		    		picLabel.removeAll();
+	    			
+	    			Box b = Box.createVerticalBox();
+	    			
+	    			s1.setText(hs1 + " " + h1);
+	    			s1.setForeground(Color.WHITE);
+	    			s1.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    			b.add(s1);
+	    			s2.setText(hs2 + " " + h2);
+	    			s2.setForeground(Color.WHITE);
+	    			s2.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    			b.add(s2);
+	    			s3.setText(hs3 + " " + h3);
+	    			s3.setForeground(Color.WHITE);
+	    			s3.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    			b.add(s3);
+	    			s4.setText(hs4 + " " + h4);
+	    			s4.setForeground(Color.WHITE);
+	    			s4.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    			b.add(s4);
+	    			s5.setText(hs5 + " " + h5);
+	    			s5.setForeground(Color.WHITE);
+	    			s5.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    			b.add(s5);
+	    			
+	    			b.add(start);
+	    			GridBagConstraints gbc = new GridBagConstraints();
+	    			
+	    			picLabel.add(b, gbc);
+	    			frame.add(picLabel);
+	    			
+		    		frame.revalidate();
+	    			frame.repaint();
+	    			frame.setVisible(true);
+	    			
+	    			highScore = false;
+	    			start.setEnabled(true);
+	    			
+		    	}
+
+		    	else if(end){
+		    		frame.getContentPane().removeAll();
+		    		picLabel.remove(box);
+		    		
+		    	
+		    		JLabel scores = new JLabel("Your Score: " + score );
+		    		JLabel enter = new JLabel("Put your name here to record your high score!");
+		    		scores.setForeground(Color.WHITE);
+		    		enter.setForeground(Color.WHITE);
+		    		name = new JTextField();
+		    		name.addActionListener(this);
+		    		Box b = Box.createVerticalBox();
+		    		b.add(scores);
+		    		b.add(enter);
+		    		b.add(name);
+		    		GridBagConstraints gbc = new GridBagConstraints();
+		    		picLabel.add(b,gbc);
+		    		frame.add(picLabel);
+		    		frame.revalidate();
+	    			frame.repaint();
+	    			frame.setVisible(true);
+	    			end = false;
+		    		
+		    		
+		    	}
+
 		    //If the game has been started from the menu screen
-		    	if(begin)
+		    	else if(begin)
 		    	{
 		    	
 		    		//Draws the current level as game progresses
-		    		if(start.isEnabled() || won ){
+		    		if(start.isEnabled() || won && curComp != levels.get(levels.size() - 1) ){
 		    			start.setEnabled(false);
 		    			frame.remove(menu);
 		    			frame.remove(picLabel);
@@ -150,15 +274,20 @@ public class IntergalacticBreakout extends MouseAdapter {
 		    		powerups = curComp.getPowerups();
 		    		p = curComp.getPaddle();
 		    	
-		    		if(bricks.isEmpty())
+		    		if(bricks.isEmpty()){
 		    			won = true;
+		    			if(curComp == levels.get(levels.size() - 1)){
+		    				end = true;
+		    				begin = false;
+		    			}
+		    		}
 		    	
 		    		//Decrements lives and replaces missing balls
 		    		if(balls.isEmpty())
 		    		{
 		    			numLives--;
 		    			if(numLives <= 0) 
-		    				System.exit(0);
+		    				end = true;
 		    			curComp.setLives(numLives);
 		    			balls.add(new Ball(p.getBounds().x + p.getWidth()/2,
 		    							   p.getBounds().y,
@@ -199,15 +328,67 @@ public class IntergalacticBreakout extends MouseAdapter {
 		    		}
 		    		((JComponent)curComp).repaint();
 		    	}
-		    
-		    	if(ae.getSource() == start)
-		    	{
-		    		begin = true;
-		    	}
+		    	 else if (menuM){
+		    		//Initial number of lives
+		    		 
+		    		//Queues all the levels
+		    	    	levels = new ArrayList<LevelComponent>();
+		    	    	levels.add(new LevelOneComponent());
+		    	    	 
+		    	    	curComp = levels.get(0);
+		    	    	numLives = 1;
+		    	    	curComp.setLives(numLives);
+		    	    	score = 0;
+		    	    	curComp.setScore(score);
+		    	    	powerups = curComp.getPowerups();
+		    	    	
+		    		 	frame.getContentPane().removeAll();
+		    		 	menu = new JPanel();
+		    			
+		    			JLabel howTo = new JLabel("<html><body>How to play:<br>" +
+		    									  "Move the mouse to move the paddle<br>" +
+		    									  "Click to release the ball<br>" +
+		    									  "Collect falling powerups for an extra bonus!</body></html>");
+		    			howTo.setForeground(Color.WHITE);
+		    			howTo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		    			BufferedImage background = testImage("MenuBack.png");
+		    			
+		    			picLabel = new JLabel(new ImageIcon(background));
+		    			picLabel.setLayout(new GridBagLayout());
+		    			picLabel.setAlignmentX(Component.TOP_ALIGNMENT);
+		    			
+		    			name = new JTextField();
+		    			
+		    			start = new JButton("Start Game");
+		    			start.setAlignmentX(Component.CENTER_ALIGNMENT);
+		    			highScores = new JButton("High Scores");
+		    			highScores.setAlignmentX(Component.CENTER_ALIGNMENT);
+		    			GridBagConstraints gbc = new GridBagConstraints();
+		    			box = Box.createVerticalBox();
+		    			box.add(start);
+		    			box.add(highScores);
+		    			box.add(Box.createVerticalStrut(130));
+		    			box.add(howTo);
+		    			
+		    			picLabel.add(box, gbc);
+		    			frame.add(picLabel);
+		    			
+		    			frame.setVisible(true);
+				    	try {
+							updateScores();
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+				    	start.addActionListener(this);
+						highScores.addActionListener(this);
+						menuM = false;
+				    }
+		    	
 		    }
+		   
 		});
 		
-		start.addActionListener(al);
+		
 		
 		//Controls level progression
     	for(LevelComponent l: levels){
@@ -259,14 +440,17 @@ public class IntergalacticBreakout extends MouseAdapter {
     	p = curComp.getPaddle();
     	
     	//Bouncing off walls and ceiling
-    	if(b.getBounds().x + 2 * b.getRadius() > 800 ||
-    	   b.getBounds().x < 0)
-    		b.updateSpeed(-b.getXspeed(), b.getYspeed());
+    	if(b.getBounds().x + 2 * b.getRadius() > 800)
+    		b.updateSpeed((int)-Math.abs(b.getXspeed()), b.getYspeed());
+    	
+    	if(b.getBounds().x < 0)
+    		b.updateSpeed((int)Math.abs(b.getXspeed()), b.getYspeed());
     	
     	if(b.getBounds().y < 0)
-    		b.updateSpeed(b.getXspeed(), -b.getYspeed());
+    		b.updateSpeed(b.getXspeed(), (int) Math.abs(b.getYspeed()));
     		
-    	if(b.getBounds().y > 600){
+    	if(b.getBounds().y > 600)
+    	{
     		i.remove();
     		return;
     	}
@@ -308,7 +492,7 @@ public class IntergalacticBreakout extends MouseAdapter {
     			if(k.getDurability() <= 0)
     			{
     				bricks.remove(k);
-    				powerups.add(k.getPowerup());
+    				if(k.getPowerup() != null) powerups.add(k.getPowerup());
     			}
     			return;
     		}
@@ -322,7 +506,7 @@ public class IntergalacticBreakout extends MouseAdapter {
     {
     	Paddle pa = curComp.getPaddle();
     	if(p.getEffect() == "Wide Paddle"){
-			if(pa.getWidth() > 100) pa.setWidth((int)(.5 * pa.getWidth()));
+			if(pa.getWidth() > 150) pa.setWidth((int)(.5 * pa.getWidth()));
 		}
     	else if(p.getEffect() == "Sticky Ball"){
     		stickyBall = false;
@@ -415,6 +599,24 @@ public class IntergalacticBreakout extends MouseAdapter {
 		catch (Exception e) { }
 		return image;
 	}
+    
+    private void updateScores() throws FileNotFoundException{
+    	Scanner scan = new Scanner(new File("HighScores.txt"));
+    	hs1 =scan.nextLine();
+    	h1 = scan.nextInt();
+    	scan.nextLine();
+    	hs2 = scan.nextLine();
+    	h2 = scan.nextInt();
+    	scan.nextLine();
+    	hs3 = scan.nextLine();
+    	h3 = scan.nextInt();
+    	scan.nextLine();
+    	hs4 = scan.nextLine();
+    	h4 = scan.nextInt();
+    	scan.nextLine();
+    	hs5 = scan.nextLine();
+    	h5 = scan.nextInt();
+    }
     
     
 }

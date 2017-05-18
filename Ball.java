@@ -14,12 +14,11 @@ public class Ball {
 	private BufferedImage pic;
 	private boolean inPlay;
 	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xspeed
-	 * @param yspeed
+	/**Creates a new Ball with the given parameters
+	 * @param x the ball's X position
+	 * @param y the ball's Y position
+	 * @param xspeed the ball's horizontal speed
+	 * @param yspeed the ball's vertical speed
 	 */
     public Ball(double x, double y, int xspeed, int yspeed) 
     {
@@ -30,8 +29,7 @@ public class Ball {
     	inPlay = false;
    }
     
-    /**
-     * 
+    /** Move's the ball's bound by the magnitude of the X and Y speed
      */
     public void move(){
     	circle = new Ellipse2D.Double(circle.x + xspeed,
@@ -39,10 +37,9 @@ public class Ball {
     						   RADIUS, RADIUS);
     }
     
-    /**
-     * 
-     * @param xspeed
-     * @param yspeed
+    /**Updates the speed and direction of the ball
+     * @param xspeed the ball's horizontal speed
+     * @param yspeed the ball's vertical speed
      */
     public void updateSpeed(int xspeed, int yspeed)
     {
@@ -50,46 +47,42 @@ public class Ball {
     	this.xspeed = xspeed;
     }
     
-    /**
-     * 
-     * @param i
+    /**Sets the ball "in play" meaning it's no longer
+     * stuck to the paddle
+     * @param i whether the ball is in play
      */
     public void setPlay(boolean i)
     {
     	inPlay = i;
     }
     
-    /**
-     * 
-     * @return
+    /**Returns whether the ball has left the paddle
+     * @return whether the ball has left the paddle
      */
     public boolean inPlay()
     {
     	return inPlay;
     }
     
-    /**
-     * 
-     * @return
+    /**Returns the bounding ellipse of the ball
+     * @return the bounding ellipse of the ball
      */
     public Ellipse2D.Double getBounds()
     {
     	return circle;
     }
     
-    /**
-     * 
-     * @return
+    /**Returns the ball's radius
+     * @return the ball's radius
      */
     public int getRadius()
     {
     	return RADIUS;
     }
     
-    /**
-     * 
-     * @param x
-     * @param y
+    /**Updates the boundaries of the ball
+     * @param x the new X coordinate
+     * @param y the new Y coordinate
      */
     public void updateBounds(double x, double y)
     {
@@ -97,37 +90,33 @@ public class Ball {
     							     RADIUS, RADIUS);
     }
     
-    /**
-     * 
-     * @return
+    /**Returns the ball's horizontal speed
+     * @return the ball's horizontal speed
      */
     public int getXspeed()
     {
     	return xspeed;
     }
    
-    /**
-     * 
-     * @return
+    /**Returns the ball's vertical speed
+     * @return the ball's vertical speed
      */
     public int getYspeed()
     {
     	return yspeed;
     }
     
-    /**
-     * 
-     * @return
+    /**Returns the ball's sprite
+     * @return the ball's sprite
      */
     public BufferedImage getImage()
     {
     	return pic;
     }
    
-    /**
-     * 
-     * @param fileName
-     * @return
+    /** Finds the ball's sprite from a filename
+     * @param fileName the filename of the ball's sprite
+     * @return the ball's sprite
      */
     private BufferedImage testImage(String fileName)
 	{
