@@ -5,7 +5,7 @@ import java.util.*;
 public class StickyBallPowerup extends Powerup {
 	
     public StickyBallPowerup(int x, int y) {
-    	super(x, y);
+    	super(x, y, "StickyBall.png");
     }
     
     public String getEffect(){

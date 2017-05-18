@@ -12,7 +12,7 @@ import java.awt.Rectangle;
 public class MultiballPowerup extends Powerup {
 	
     public MultiballPowerup(int x, int y) {
-    	super(x, y);
+    	super(x, y, "multiball.png");
     }
     
     public String getEffect(){

@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 public class WidePaddlePowerup extends Powerup {
 	
     public WidePaddlePowerup( int x, int y) {
-    	super(x, y);
+    	super(x, y, "WidePaddle.png");
     }
     
     public String getEffect(){

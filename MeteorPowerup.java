@@ -6,7 +6,7 @@ public class MeteorPowerup extends Powerup{
 	
 	
     public MeteorPowerup(int x, int y) {
-    	super(x, y);
+    	super(x, y, "FreeLife.png");
     }
     
     public String getEffect(){

@@ -1,3 +1,4 @@
+
 /**
  * @(#)IBRunner.java
  *
@@ -10,9 +11,9 @@
 public class IBRunner {
 
 
-    public static void main(String[] args){
+    public static void main(String[] args)
+    {
     	IntergalacticBreakout ibt = new IntergalacticBreakout();
-
     }
     
     
