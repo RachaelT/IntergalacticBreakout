@@ -1,15 +1,13 @@
-import java.awt.Rectangle;
-
-/**
- * @(#)MultiballPowerup.java
- *
- *
- * @author 
- * @version 1.00 2017/4/27
+/**The multiball powerup adds an extra ball into play
+ * which remains until it flies off screen
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
 
-
-public class MultiballPowerup extends Powerup {
+public class MultiballPowerup extends Powerup 
+{
 	
 	/**Creates a new powerup
 	 * @param x x coordinate of powerup

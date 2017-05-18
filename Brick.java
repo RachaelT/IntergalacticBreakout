@@ -1,11 +1,10 @@
-/**
- * @(#)Brick.java
- *
- *
- * @author 
- * @version 1.00 2017/4/24
+/**This class represents a brick in the breakout game,
+ * maintaining it's boundaries, remaining durability, and appearance
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
-
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,11 +13,10 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 
-
 public class Brick {
 	
-	static final int WIDTH = 50;
-	private static final int HEIGHT = 30;
+	public static final int WIDTH = 50;
+	public static final int HEIGHT = 30;
 	
 	private int durability;
 

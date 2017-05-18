@@ -1,23 +1,37 @@
-/**
- * @(#)WidePaddlePowerup.java
- *
- *
- * @author 
- * @version 1.00 2017/4/24
+/**The Wide Paddle powerup causes the paddle
+ * to double in width for 30 seconds after
+ * its activation
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
 
-import java.awt.Rectangle;
-public class WidePaddlePowerup extends Powerup {
+public class WidePaddlePowerup extends Powerup 
+{
 	
-    public WidePaddlePowerup( int x, int y) {
+	/**Creates a new powerup
+	 * @param x x coordinate of powerup
+	 * @param y y coordinate of powerup
+	 */
+    public WidePaddlePowerup( int x, int y) 
+    {
     	super(x, y, "WidePaddle.png");
     }
     
-    public String getEffect(){
+    /**Returns the effect of the powerup
+     * @return the effect of the powerup
+     */
+    public String getEffect()
+    {
     	return "Wide Paddle";
     }
     
-    public String getEffectDescription(){
+    /**Returns a description of the powerup's effect
+     * @return a description of the powerup's effect
+     */
+    public String getEffectDescription()
+    {
     	return "Increases paddle width for 30 seconds.";
     }
     

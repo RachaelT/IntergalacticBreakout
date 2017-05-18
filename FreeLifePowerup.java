@@ -1,13 +1,14 @@
-/**
- * @(#)FreeLifePowerup.java
- *
- *
- * @author 
- * @version 1.00 2017/4/27
+/**The Free life powerup adds one
+ * to the player's life count
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
 
 
-public class FreeLifePowerup extends Powerup {
+public class FreeLifePowerup extends Powerup 
+{
 
 	/**Creates a powerup with a specific image
 	 * @param x the x position of the powerup's image
