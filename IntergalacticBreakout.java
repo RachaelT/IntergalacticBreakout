@@ -1,9 +1,8 @@
-/**
- * @(#)IntergalacticBreakout.java
- *
- *
- * @author 
- * @version 1.00 201DEFAULT_HIGH_SPEED/4/2DEFAULT_HIGH_SPEED
+/**Manages the game's mechanics and element interaction
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import java.util.Scanner;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -43,7 +41,7 @@ public class IntergalacticBreakout extends MouseAdapter {
 	private static final int HEIGHT = 600; 
 	private static final int DEFAULT_HIGH_SPEED = 8;
 	private static final int DEFAULT_LOW_SPEED = 6;
-	private static final int TIMER_SKIP = 40;
+	private static final int TIMER_SKIP = 60;
 	//Menu elements
 	private JButton start;
 	private JButton highScores;
@@ -60,7 +58,6 @@ public class IntergalacticBreakout extends MouseAdapter {
 	
 	//Game display mechanics
 	private JFrame frame;
-	private JPanel menu;
 	private JLabel picLabel;
 	private static LevelComponent curComp;
 	private Timer timer;
@@ -244,13 +241,8 @@ public class IntergalacticBreakout extends MouseAdapter {
 		    }
 		   
 		});
-		
-		
 			timer = new Timer(TIMER_SKIP, al);
-			timer.start();
-    	
-			
-			
+			timer.start();	
 	}
 
     
@@ -660,11 +652,13 @@ public class IntergalacticBreakout extends MouseAdapter {
 			//Queues and resets all the levels
 	    	levels = new ArrayList<LevelComponent>();
 	    	levels.add(new LevelOneComponent());
+	    	levels.add(new LevelTwoComponent());
 	    	levels.add(new LevelThreeComponent());
+	    	levels.add(new LevelFourComponent());
 	    	
 	    	lIter = levels.iterator();
 	    	curComp = levels.get(0);
-	    	numLives = 1;
+	    	numLives = 5;
 	    	curComp.setLives(numLives);
 	    	score = 0;
 	    	curComp.setScore(score);

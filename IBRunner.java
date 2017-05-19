@@ -1,15 +1,14 @@
-import java.io.FileNotFoundException;
-
-/**
- * @(#)IBRunner.java
- *
- *
- * @author 
- * @version 1.00 2017/5/10
+/**This class holds the main method that runs the game
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
 
+import java.io.FileNotFoundException;
 
-public class IBRunner {
+public class IBRunner 
+{
 
 
     public static void main(String[] args) throws FileNotFoundException

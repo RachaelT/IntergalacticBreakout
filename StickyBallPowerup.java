@@ -9,7 +9,6 @@
 
 public class StickyBallPowerup extends Powerup 
 {
-	
 	/**Creates a new powerup
 	 * @param x x coordinate of powerup
 	 * @param y y coordinate of powerup

@@ -1,53 +1,89 @@
-/**
- * @(#)Paddle.java
- *
- *
- * @author 
- * @version 1.00 2017/5/10
+/**This class represents a paddle in the breakout game,
+ * maintaining it's boundaries, motion, and appearance
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
+
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import java.io.File;
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
 
-public class Paddle {
+public class Paddle 
+{
 
-	private int width = 150;
-	private int height = 20;
-	private int x = 350;
-	private int y = 550;
+	public static final int DEFAULT_WIDTH = 150;
+	public static final int DEFAULT_HEIGHT = 20;
+	public static final int DEFAULT_X = 350;
+	public static final int DEFAULT_Y = 550;
+	
+	private int width;
+	private int height;
+	private int x ;
+	private int y ;
+	
 	private Rectangle bounds;
 	private BufferedImage image;
 	
-    public Paddle() {
+	/**Generates a paddle with default position and size
+	 */
+    public Paddle() 
+    {
+    	width = DEFAULT_WIDTH;
+    	height = DEFAULT_HEIGHT;
+    	x = DEFAULT_X;
+    	y = DEFAULT_Y;
     	updateBounds();
     }
     
-    
-    public int getWidth(){
+    /**Returns the paddle's width
+     * @return the paddle's width
+     */
+    public int getWidth()
+    {
     	return width;
     }
     
-    public int getHeight(){
+    /**Returns the paddle's height
+     * @return the paddle's height
+     */
+    public int getHeight()
+    {
     	return height;
     }
     
-    public void setWidth(int w){
+    /**Updates the paddle's width
+     * @param w the paddle's new width
+     */
+    public void setWidth(int w)
+    {
     	width = w;
     	updateBounds();
     }
     
-    public void setX(int x){
+    /**Updates the paddle's x position
+     * @param x the paddle's new x position
+     */
+    public void setX(int x)
+    {
     	this.x = x;
     	updateBounds();
     }
     
-    public Rectangle getBounds(){
+    /**Returns the paddle's bounding rectangle
+     * @return the paddle's bounding rectangle
+     */
+    public Rectangle getBounds()
+    {
     	return bounds;
     }
     
+    /**Returns the paddle's sprite
+     * @return the paddle's sprite
+     */
     public BufferedImage getImage()
     {
     	try{
@@ -57,7 +93,10 @@ public class Paddle {
     	return image;
     }
     
-    private void updateBounds(){
+    /**Updates the boundaries of the paddle
+     */
+    private void updateBounds()
+    {
     	bounds = new Rectangle(x, y, width, height);
     }
     

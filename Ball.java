@@ -5,12 +5,15 @@
  * @date 5/17/2017
  * Period 2
  */
+
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
+import java.io.File;
 import javax.imageio.ImageIO;
-public class Ball {
+
+public class Ball
+{
 
 	private static final int RADIUS = 10;
 	private int xspeed;

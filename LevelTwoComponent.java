@@ -1,8 +1,12 @@
-
 /**
- * 
- * 
+ * @(#)LevelTwoComponent.java
+ *
+ *
+ * @author 
+ * @version 1.00 2017/5/17
  */
+
+
 import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,27 +15,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.awt.geom.Ellipse2D;
 
 
-public class LevelTwoComponent extends JComponent implements LevelComponent
+public class LevelTwoComponent extends LevelComponent
 {
 
-	private ArrayList<Brick> bricks;
-	private ArrayList<Ball> balls;
-	private ArrayList<Powerup> powerups;
-	private Paddle paddle;
-	private String lives;
-
+	private static final int YELLOW = 3;
+	private static final int GREEN = 4;
+	private static final int BLUE = 5;
+	private static final int NUM_COLORS = 8;
 	/**
 	 * 
 	 */
     public LevelTwoComponent() 
     {
-    	lives = "";
-    	bricks = new ArrayList<Brick>();
-    	balls = new ArrayList<Ball>();
-    	powerups = new ArrayList<Powerup>();
-    	paddle = new Paddle();
+    	super("KnownUniverse.jpg");
     	init();
     }
     
@@ -40,133 +39,60 @@ public class LevelTwoComponent extends JComponent implements LevelComponent
 	 */
     public void init()
     {
+    	ArrayList<Brick> bricks = super.getBricks();
     	//Generates Brick pattern
-    	for(int i = 0; i < 8; i++)
+    	for(int i = 0; i < YELLOW; i++)
     	{
-    		bricks.add(new Brick(375, 150 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(375, 150 + (i * 30))));
-    		bricks.add(new Brick(325, 150 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(325, 150 + (i * 30))));
+    		for(int j = 0; j <= GREEN; j++)
+    		{
+    			bricks.add(new Brick(i * Brick.WIDTH + BLUE * Brick.WIDTH, i * Brick.HEIGHT,
+    							 i % YELLOW + 1 ));
+    		
+    		}
+    	}
+    	
+    	for(int i = 0; i < YELLOW; i++)
+    	{
+    		for(int j = 0; j <= GREEN; j++)
+    		{
+    			bricks.add(new Brick(i * Brick.WIDTH + Brick.WIDTH * NUM_COLORS, i * Brick.HEIGHT,
+    								(YELLOW - i) ));
+    	
+    		}
+    	}
+    				 
+		
+		for(int i = 0; i < NUM_COLORS; i++)
+		{
+    	
+    		bricks.add(new Brick(i * Brick.WIDTH + Brick.WIDTH * NUM_COLORS, (i * Brick.HEIGHT), YELLOW));
+    		bricks.add(new Brick(i * Brick.WIDTH + Brick.WIDTH * NUM_COLORS,  (i * Brick.HEIGHT) + Brick.HEIGHT,
+    							 YELLOW));
+    	}
+    	
+    	for(int i = 0; i < NUM_COLORS; i++)
+    	{
+    		bricks.add(new Brick(i * Brick.WIDTH + Brick.WIDTH * NUM_COLORS, (i * Brick.HEIGHT),
+    						  	 YELLOW));
+    		bricks.add(new Brick(i * Brick.WIDTH + Brick.WIDTH * NUM_COLORS,  (i * Brick.HEIGHT) + Brick.HEIGHT,
+    							 YELLOW));
+    	}
+    	
+    	for(int i = 0; i < NUM_COLORS; i++)
+    	{
+    		bricks.add(new Brick(i * Brick.WIDTH, Brick.HEIGHT * NUM_COLORS -((i * Brick.HEIGHT)),
+    						  	 YELLOW));
+    		bricks.add(new Brick(i * Brick.WIDTH, Brick.HEIGHT * NUM_COLORS -((i * Brick.HEIGHT) + Brick.HEIGHT),
+    							 YELLOW)); 
+    	}
+    	ArrayList<Ball> balls = super.getBalls(); 
+    	Paddle paddle = super.getPaddle();
 
-    	}
-    	for(int i = 0; i < 6; i++){
-    		bricks.add(new Brick(275, 180 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(275, 180 + (i * 30))));
-    		bricks.add(new Brick(425, 180 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(425, 180 + (i * 30))));
-    	}
-    	
-    	for(int i = 0; i < 4; i++){
-    		bricks.add(new Brick(225, 210 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(225, 210 + (i * 30))));
-    		bricks.add(new Brick(475, 210 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(475, 210 + (i * 30))));
-    	}
-    	for(int i = 0; i < 2; i++){
-    		bricks.add(new Brick(175, 240 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(175, 240 + (i * 30))));
-    		bricks.add(new Brick(525, 240 + (i * 30),
-    							 i%8 + 1, 
-    							 new MeteorPowerup(525, 240 + (i * 30))));
-    	}
-    	
-    	
     	//Adds a ball
     	balls.add(new Ball(paddle.getBounds().x + paddle.getWidth()/2,
     					   paddle.getBounds().y,
-    					   2, -5));
+    					   super.getRandom(), -super.getRandom()));
     }
-    
-    /**
-	 * 
-	 */
-    @Override
-	public void paintComponent(Graphics g) 
-	{
-		Graphics2D gr2 = (Graphics2D) g;
-	
-		// Draw Bricks
-    	for(Brick b: bricks)
-    	{
-			gr2.drawImage(b.getColor(), b.getBounds().x, b.getBounds().y, 50, 30, null);
-    	}
-    	
-    	//Draw Paddle
-    	gr2.fill(paddle.getBounds());
-    	
-    	//Draw Balls
-    	for(Ball b: balls)
-    	{
-    		if(!b.inPlay())
-    		{
-    			b.updateBounds(paddle.getBounds().x + paddle.getWidth()/2,
-    						   paddle.getBounds().y, 10);
-    		}
-    		else
-    		{
-    			b.move();
-    		}
-    		gr2.draw(b.getBounds());
-    	}
-    	
-    	//Draw Lives
-    	g.setColor(Color.BLACK);
-    	Font myFont = new Font("SanSerif", Font.BOLD, 18);
-    	g.setFont(myFont);
-    	g.drawString("Lives: " + lives, 700, 570);
-    	
-    	//Draw falling powerups
-    	for(Powerup p: powerups)
-    	{
-    		if(!p.isActive()) gr2.fill(p.getBounds());
-    	}	
-	}
-	
-    /**
-	 * 
-	 */
-	public Paddle getPaddle()
-	{
-		return paddle;
-	}
-	
-	/**
-	 * 
-	 */
-	public ArrayList<Brick> getBricks()
-	{
-		return bricks;
-	}
-	
-	/**
-	 * 
-	 */
-	public ArrayList<Ball> getBalls()
-	{
-		return balls;
-	}
-	
-	/**
-	 * 
-	 */
-	public ArrayList<Powerup> getPowerups()
-	{
-		return powerups;
-	}
-	
-	/**
-	 * 
-	 */
-	public void setLives(int l)
-	{
-		lives = Integer.toString(l);
-	}
+   
 
 }

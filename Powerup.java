@@ -6,17 +6,18 @@
  * @date 5/17/2017
  * Period 2
  */
+
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
-import javax.imageio.ImageIO;;
+import java.io.File;
+import javax.imageio.ImageIO;
+
 public abstract class Powerup {
 	
 	public static final long DURATION = 30000;
 	public static final int WIDTH = 30;
 	public static final int HEIGHT = 30;
-	
 	
 	private boolean active;
 	

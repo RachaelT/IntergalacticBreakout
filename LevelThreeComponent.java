@@ -44,44 +44,6 @@ public class LevelThreeComponent extends LevelComponent
     {
     	ArrayList<Brick> bricks = super.getBricks(); 
     	//Generates Brick pattern
-		//Orange star
-		bricks.add(new Brick(550, 150, 2));
-    	for(int i = 0; i < 3; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 500, 180, 2));
-    	}
-    	for(int i = 0; i < 5; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 450, 210, 2));
-    	}
-    	for(int i = 0; i < 9; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 350, 240, 2));
-    	}
-    	for(int i = 0; i < 7; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 400, 270, 2));
-    	}
-    	for(int i = 0; i < 5; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 450, 300, 2));
-    	}
-    	for(int i = 0; i < 3; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 400, 330, 2));
-    	}
-    	for(int i = 0; i < 3; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 600, 330, 2));
-    	}
-    	for(int i = 0; i < 3; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 350, 360, 2));
-    	}
-    	for(int i = 0; i < 3; i++)
-    	{
-    		bricks.add(new Brick((i * 50) + 650, 360, 2));
-    	}
 		
 		//yellowstar pattern
 		bricks.add(new Brick(200, 0, 3));
@@ -129,6 +91,7 @@ public class LevelThreeComponent extends LevelComponent
     	bricks.add(new Brick(700, 30, 8));
     	bricks.add(new Brick(500, 90, 8));
     	bricks.add(new Brick(700, 180, 8));
+    	
     	
     	ArrayList<Ball> balls = super.getBalls(); 
     	Paddle paddle = super.getPaddle();

@@ -13,7 +13,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 
-public class Brick {
+public class Brick 
+{
 	
 	public static final int WIDTH = 50;
 	public static final int HEIGHT = 30;

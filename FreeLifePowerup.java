@@ -6,7 +6,6 @@
  * Period 2
  */
 
-
 public class FreeLifePowerup extends Powerup 
 {
 
