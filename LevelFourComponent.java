@@ -1,11 +1,10 @@
-/**
- * @(#)LevelFourComponent.java
- *
- *
- * @author 
- * @version 1.00 2017/5/18
+/**The graphics component for level 4
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
-
+ 
 import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
