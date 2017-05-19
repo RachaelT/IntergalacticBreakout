@@ -1,21 +1,12 @@
+import java.util.ArrayList;
+
 /**
- * @(#)LevelTwoComponent.java
- *
- *
- * @author 
- * @version 1.00 2017/5/17
+ * 
+ * @author Rachael Thompson, Marshall Morton, Diana Shao
+ * @date 5/17/2017
+ * Period 2
  */
 
-
-import javax.swing.JComponent;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.awt.geom.Ellipse2D;
 
 
 public class LevelTwoComponent extends LevelComponent
@@ -23,10 +14,9 @@ public class LevelTwoComponent extends LevelComponent
 
 	private static final int YELLOW = 3;
 	private static final int GREEN = 4;
-	private static final int BLUE = 5;
 	private static final int NUM_COLORS = 8;
-	/**
-	 * 
+	
+	/**Creates a new level with the specified image file as a background
 	 */
     public LevelTwoComponent() 
     {
@@ -34,33 +24,27 @@ public class LevelTwoComponent extends LevelComponent
     	init();
     }
     
-    /**
-	 * 
+    /**Generates the graphics for this level
 	 */
     public void init()
     {
     	ArrayList<Brick> bricks = super.getBricks();
-    	//Generates Brick pattern
-    	for(int i = 0; i < YELLOW; i++)
-    	{
-    		for(int j = 0; j <= GREEN; j++)
-    		{
-    			bricks.add(new Brick(i * Brick.WIDTH + BLUE * Brick.WIDTH, i * Brick.HEIGHT,
-    							 i % YELLOW + 1 ));
+    	
+    	for(int i = 0; i < NUM_COLORS; i++){
+    		bricks.add(new Brick(YELLOW * Brick.WIDTH, i * Brick.HEIGHT, GREEN));
     		
-    		}
     	}
     	
-    	for(int i = 0; i < YELLOW; i++)
+    	for(int i = 0; i < NUM_COLORS; i++)
     	{
-    		for(int j = 0; j <= GREEN; j++)
-    		{
-    			bricks.add(new Brick(i * Brick.WIDTH + Brick.WIDTH * NUM_COLORS, i * Brick.HEIGHT,
-    								(YELLOW - i) ));
-    	
-    		}
-    	}
-    				 
+    		 bricks.add(new Brick(i * Brick.WIDTH + GREEN * Brick.WIDTH, 180, GREEN));
+
+    	}						 					 
+    							 
+    	for(int i = 0; i < NUM_COLORS; i++)
+    	{
+    		bricks.add(new Brick(i * 2 * Brick.WIDTH, 300, 5));
+    	}						 
 		
 		for(int i = 0; i < NUM_COLORS; i++)
 		{

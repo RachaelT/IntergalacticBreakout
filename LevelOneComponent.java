@@ -21,7 +21,6 @@ public class LevelOneComponent extends LevelComponent
     
     /**Initializes the game elements
      * and adds them to the appropriate collection
-	 * 
 	 */
     public void init()
     {
@@ -31,61 +30,34 @@ public class LevelOneComponent extends LevelComponent
     	//Generates Brick pattern
     	for(int i = 0; i < NUM_COLORS; i++)
     	{
-    		
     		bricks.add(new Brick(i * Brick.WIDTH, 0 + (i * Brick.HEIGHT),
-    							 i % NUM_COLORS + 1, 
-    							 new MeteorPowerup(i * Brick.WIDTH + 
-    									 		   Brick.WIDTH / 2,
-    									 		   0 + (i * 
-    									 		   Brick.HEIGHT))));
+    							 i % NUM_COLORS + 1));
     		
     		bricks.add(new Brick(i * Brick.WIDTH, Brick.HEIGHT + 
     							(i * Brick.HEIGHT),
-    							 i % NUM_COLORS + 1, 
-    							 new FreeLifePowerup(i * Brick.WIDTH + 
-    									 			 Brick.WIDTH / 2, 
-    									 			 Brick.HEIGHT + 
-    									 			 (i * Brick.HEIGHT))));
+    							 i % NUM_COLORS + 1));
     		
     		bricks.add(new Brick(i * Brick.WIDTH, 2 * Brick.HEIGHT + 
     						    (i * Brick.HEIGHT),
-    							 i % NUM_COLORS + 1, 
-    							 new MeteorPowerup(i * Brick.WIDTH + 
-    									 		   Brick.WIDTH / 2,
-    									 		   2 * Brick.HEIGHT + 
-    									 		   (i * Brick.HEIGHT))));
+    							 i % NUM_COLORS + 1));
     	}
     	
-    	for(int i = NUM_COLORS; i >= 0; i--)
+    	for(int i = NUM_COLORS - 1 ; i >= 0; i--)
     	{
     		bricks.add(new Brick(i * Brick.WIDTH + NUM_COLORS * 
     				             Brick.WIDTH, (NUM_COLORS + 1) * 
     				             Brick.HEIGHT - (i * Brick.HEIGHT),
-    							 NUM_COLORS - (i % NUM_COLORS), 
-    						  	 new MeteorPowerup(i * Brick.WIDTH + NUM_COLORS
-    						  			           * Brick.WIDTH + Brick.WIDTH
-    						  			           / 2, (NUM_COLORS + 1) * 
-    						  			           Brick.HEIGHT - 
-    						  			           (i * Brick.HEIGHT))));
+    							 NUM_COLORS - (i % NUM_COLORS)));
+    						  	
     		
     		bricks.add(new Brick(i * Brick.WIDTH + NUM_COLORS * 
     							 Brick.WIDTH, NUM_COLORS * 
     							 Brick.HEIGHT - (i * Brick.HEIGHT),
-    							 NUM_COLORS - (i % NUM_COLORS), 
-    							 new WidePaddlePowerup(i * Brick.WIDTH + 
-    							    		 		   NUM_COLORS * Brick.WIDTH
-    							    		 		   + Brick.WIDTH / 2, 
-    							    		 		   NUM_COLORS * Brick.HEIGHT
-    							    		 		   - (i * Brick.HEIGHT))));
-    		
+    							 NUM_COLORS - (i % NUM_COLORS)));
     		bricks.add(new Brick(i * Brick.WIDTH + NUM_COLORS * Brick.WIDTH, 
     				  			(NUM_COLORS - 1) * Brick.HEIGHT - 
     				  			(i * Brick.HEIGHT), NUM_COLORS - 
-    				  			(i % NUM_COLORS), 
-    							new MeteorPowerup(i * Brick.WIDTH + NUM_COLORS
-    											  * Brick.WIDTH + Brick.WIDTH / 2,
-    									 	     (NUM_COLORS - 1) * Brick.HEIGHT - 
-    									 	     (i * Brick.HEIGHT))));
+    				  			(i % NUM_COLORS)));
     	}
     	
     	ArrayList<Ball> balls = super.getBalls(); 
@@ -95,10 +67,6 @@ public class LevelOneComponent extends LevelComponent
     	balls.add(new Ball(paddle.getBounds().x + paddle.getWidth()/2,
     					   paddle.getBounds().y,
     					   super.getRandom(), -super.getRandom()));
-    	
-    	
     }
-    
-    
 
 }
